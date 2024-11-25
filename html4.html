@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+    <script src="https://unpkg.com/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
+</head>
+
+<body>
+    
+    <section class="section" x-data="loginForm()" x-cloak>
+        <div class="container">
+            <h1 class="title">Page de connexion</h1>
+            <form @submit.prevent="validateLogin" novalidate>
+                <div class="field">
+                    <label class="label" for="login-email">Adresse e-mail</label>
+                    <div class="control">
+                        <input class="input" type="email" id="login-email" x-model.lazy="email" placeholder="Adresse e-mail" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label" for="login-password">Mot de passe</label>
+                    <div class="control">
+                        <input class="input" type="password" id="login-password" x-model.lazy="password" placeholder="Mot de passe" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <button type="submit" class="button is-primary">Connexion</button>
+                </div>
+                <p class="has-text-danger" x-show="errorMessage" x-text="errorMessage"></p>
+            </form>
+            <div class="field">
+                <p>Pas encore inscrit ?</p>
+                <a href="index3.html" class="button is-link">Basculer vers la page d'inscription</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function loginForm() {
+            return {
+                email: '',
+                password: '',
+                errorMessage: '',
+                users: [],
+                init() {
+                    fetch('http://localhost:3000/users')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.users = data;
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors du chargement de la base de données :', error);
+                        });
+                },
+                validateLogin() {
+                    if (!this.email || !this.password) {
+                        this.errorMessage = 'Tous les champs sont requis.';
+                        return;
+                    }
+
+                    const user = this.users.find(user => user.email === this.email && user.password === this.password);
+                    if (user) {
+                        this.errorMessage = '';
+                        alert('Connexion réussie');
+                    } else {
+                        this.errorMessage = 'Adresse e-mail ou mot de passe incorrect';
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
