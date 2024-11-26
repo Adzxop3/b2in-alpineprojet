@@ -109,7 +109,7 @@
                         });
                         if (response.ok) {
                             alert('Inscription réussie');
-                            window.location.href = 'html4.html';
+                            setTimeout(() => { window.location.href = 'html4.html'; }, 3);
                         } else {
                             console.error('Erreur lors de l\'ajout de l\'utilisateur');
                         }
