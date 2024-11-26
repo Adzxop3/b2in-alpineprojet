@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    
-    <section class="section" x-data="signupForm()" x-cloak>
+    <!-- Pour voir la base de donnée, il faut installer json-server avec npm install -g json-server et lancer ce serveur avec json-server --watch bdd.json-->
+    <section class="section" x-data="signupForm()" x-init="init()" x-cloak>
         <div class="container">
             <h1 class="title">Page d'inscription</h1>
             <form @submit.prevent="validateSignup" novalidate>
@@ -61,10 +61,10 @@
                 errorMessage: '',
                 users: [],
                 init() {
-                    fetch('./bdd.json')
+                    fetch('http://localhost:3000/users')
                         .then(response => response.json())
                         .then(data => {
-                            this.users = data.users;
+                            this.users = data;
                         })
                         .catch(error => {
                             console.error('Erreur lors du chargement de la base de données :', error);
@@ -76,7 +76,7 @@
                         return;
                     }
                     if (!this.validateEmail(this.email)) {
-                        this.errorMessage = 'L'adresse e-mail n'est pas valide.';
+                        this.errorMessage = 'L\'adresse e-mail n\'est pas valide.';
                         return;
                     }
                     if (this.password !== this.confirmPassword) {
@@ -85,7 +85,14 @@
                     }
                     this.errorMessage = '';
 
-                   
+                    
+                    const existingUser = this.users.find(user => user.email === this.email);
+                    if (existingUser) {
+                        this.errorMessage = 'L\'adresse e-mail est déjà utilisée.';
+                        return;
+                    }
+
+                  
                     const newUser = {
                         username: this.username,
                         email: this.email,
@@ -102,16 +109,20 @@
                         });
                         if (response.ok) {
                             alert('Inscription réussie');
+                            window.location.href = 'html4.html';
                         } else {
-                            console.error('Erreur lors de l'ajout de l'utilisateur');
+                            console.error('Erreur lors de l\'ajout de l\'utilisateur');
                         }
                     } catch (error) {
                         console.error('Erreur lors de la mise à jour de la base de données :', error);
                     }
                 },
                 validateEmail(email) {
-                    const re = /^[^\s@]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+                    const re = /^[a-zA-Z0-9._%+-]{1,15}@[a-zA-Z0-9.-]{1,8}\.[a-zA-Z]{2,}$/;
                     return re.test(email);
+                },
+                validatePassword(password) {
+                    return password.length >= 12;
                 }
             }
         }
