@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    
-    <section class="section" x-data="loginForm()" x-cloak>
+    <section class="section" x-data="loginForm()" x-init="init()" x-cloak>
         <div class="container">
             <h1 class="title">Page de connexion</h1>
             <form @submit.prevent="validateLogin" novalidate>
@@ -62,10 +61,11 @@
                         return;
                     }
 
+                    
                     const user = this.users.find(user => user.email === this.email && user.password === this.password);
                     if (user) {
                         this.errorMessage = '';
-                        alert('Connexion réussie');
+                        alert('Connexion réussie');  
                     } else {
                         this.errorMessage = 'Adresse e-mail ou mot de passe incorrect';
                     }
