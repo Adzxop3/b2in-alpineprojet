@@ -61,3 +61,28 @@ json-server --watch bdd.json
 ### bdd.json
 Le fichier JSON contient un tableau `users`:
 ```json
+{
+  "users": []
+}
+```
+Lors de l'inscription, de nouveaux objets sont ajoutés à ce tableau: 
+```json
+{
+  "users": [
+    {
+      "id": "acc9",
+      "username": "Exemple",
+      "email": exemple@exemple.fr",
+      "password": "exemple"
+    }
+  ]
+}
+```
+## Dépendances principales
+- Bulma : Framework CSS
+- Alpine.js : Framework JavaScript
+- json-server : Simule une API REST pour lire et écrire des données en JSON
+
+## Collaborateurs
+- Adzxop3
+- Nash920
