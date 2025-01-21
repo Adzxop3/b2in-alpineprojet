@@ -25,7 +25,10 @@ Ensuite démarrer le serveur JSON, pour le démarrer, veuillez ouvrir le termina
 ```bash
 json-server --watch bdd.json
 ```
-Vous pouvez utiliser par la suite l'extension VScode **Live Server**
+Vous pouvez utiliser par la suite l'extension VScode **Live Server** </br>
+Avec ce logo : </br>
+![Capture d’écran 2025-01-21 182427](https://github.com/user-attachments/assets/e99bf302-2085-4efa-88d8-98df2d6dc80f)
+
 ## Structure du projet 
 - [Page d'inscription](index3.html)
 - [Page de connexion](html4.html)
