@@ -87,5 +87,7 @@ Lors de l'inscription, de nouveaux objets sont ajoutés à ce tableau:
 - **[Adzxop3](https://github.com/Adzxop3)**
 - **[Nash920](https://github.com/Nash920)**
 
+## Licence
+Ce projet est libre de droits.
 
 *Merci d'avoir lu ce README !*
