@@ -84,5 +84,8 @@ Lors de l'inscription, de nouveaux objets sont ajoutés à ce tableau:
 - json-server : Simule une API REST pour lire et écrire des données en JSON
 
 ## Collaborateurs
-- Adzxop3
-- Nash920
+- **[Adzxop3](https://github.com/Adzxop3)**
+- **[Nash920](https://github.com/Nash920)**
+
+
+*Merci d'avoir lu ce README !*
